@@ -1,5 +1,5 @@
 import { S3EventRecord } from "aws-lambda";
-import { getObject, putObject } from "../services/aws/s3";
+import { deleteObject, getObject, putObject } from "../services/aws/s3";
 import { simpleParser } from "mailparser";
 
 export const handleS3EventRecord = async (record: S3EventRecord) => {
@@ -27,11 +27,15 @@ export const handleS3EventRecord = async (record: S3EventRecord) => {
 
     for (const attachment of mail.attachments) {
       try {
+        // move attachment to bill bucket
         await putObject(
           billingBucket,
           `billing/${date[0]}/${date[1]}-${attachment.filename}`,
           attachment.content,
         );
+
+        // remove mail from mail bucket
+        await deleteObject(bucket, key);
       } catch (e) {
         console.error("Failed to process", {
           filename: attachment.filename,

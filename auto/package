@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# check if dist folder exists
+if [ ! -d "dist" ]; then
+    echo "dist folder does not exist, exiting"
+    exit 1
+fi
+
+cd dist || exit
+
+echo "Zipping files..."
+zip -r ../package.zip ./*

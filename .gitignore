@@ -1,3 +1,6 @@
 .idea
 node_modules
 samples
+dist
+package.zip
+.env

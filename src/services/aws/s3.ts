@@ -45,3 +45,15 @@ export const putObject = async (
     Body: buffer,
   });
 };
+
+export const deleteObject = async (bucket: string, key: string) => {
+  console.log("Trying to delete object from s3", {
+    bucket,
+    key,
+  });
+
+  await s3.deleteObject({
+    Bucket: bucket,
+    Key: key,
+  });
+};

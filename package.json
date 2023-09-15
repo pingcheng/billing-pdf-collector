@@ -2,7 +2,8 @@
   "name": "billing-pdf-collector",
   "version": "1.0.0",
   "scripts": {
-    "start": "nodemon"
+    "start": "nodemon",
+    "publish": "./auto/build && ./auto/package && ./auto/publish"
   },
   "author": "",
   "license": "MIT",
@@ -23,6 +24,7 @@
     "@aws-sdk/client-s3": "^3.413.0",
     "aws-lambda": "^1.0.7",
     "dotenv": "^16.3.1",
+    "esbuild": "^0.19.3",
     "mailparser": "^3.6.5"
   }
 }

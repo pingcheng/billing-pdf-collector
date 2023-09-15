@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# clean everything
+rm -rf dist
+
+# build the code
+echo "Building the code..."
+node build.js
+
+echo "Completed!"
