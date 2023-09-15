@@ -1,5 +1,6 @@
 {
-  "watch": [  "watch": [  "watch": [  ,
-  "watch": [ "src/**/*.spec.ts"],
-  "exec": "ts-node ./src/index.ts"
+  "watch": [ "src"],
+  "ext": "ts,json",
+  "ignore": ["src/**/*.spec.ts"],
+  "exec": "ts-node ./src/local.ts"
 }
