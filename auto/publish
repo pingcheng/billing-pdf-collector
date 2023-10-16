@@ -14,5 +14,4 @@ echo "Updating lambda function $LAMBDA_FUNCTION_NAME in region $REGION with $ZIP
 aws lambda update-function-code \
   --region $REGION \
   --function-name $LAMBDA_FUNCTION_NAME \
-  --zip-file fileb://package.zip \
-  --profile pct
+  --zip-file fileb://package.zip

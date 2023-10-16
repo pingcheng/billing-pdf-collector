@@ -31,7 +31,7 @@ export const handleS3EventRecord = async (record: S3EventRecord) => {
     for (const attachment of mail.attachments) {
 
       console.log(`${attachment.filename}'s content type is`, attachment.contentType);
-      
+
       // check the file content
       if (!allowedMimes.includes(attachment.contentType)) {
         console.warn(`${attachment.filename} is not supported, skip`);
