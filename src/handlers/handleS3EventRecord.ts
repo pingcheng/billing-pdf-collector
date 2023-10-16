@@ -7,6 +7,9 @@ export const handleS3EventRecord = async (record: S3EventRecord) => {
   const key = decodeURIComponent(record.s3.object.key.replace(/\+/g, " "));
   const fileSize = record.s3.object.size;
   const billingBucket = process.env.BILLING_BUCKET;
+  const allowedMimes = [
+    'application/pdf'
+  ]
 
   if (!billingBucket) {
     console.error("Billing bucket not defined, exit");
@@ -26,6 +29,15 @@ export const handleS3EventRecord = async (record: S3EventRecord) => {
     const date = new Date().toISOString().split("T");
 
     for (const attachment of mail.attachments) {
+
+      console.log(`${attachment.filename}'s content type is`, attachment.contentType);
+      
+      // check the file content
+      if (!allowedMimes.includes(attachment.contentType)) {
+        console.warn(`${attachment.filename} is not supported, skip`);
+        continue;
+      }
+
       try {
         // move attachment to bill bucket
         await putObject(
